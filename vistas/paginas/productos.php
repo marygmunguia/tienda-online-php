@@ -252,7 +252,8 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6">
-                        <input name="idproducto" id="idproducto" placeholder="" class="form-control" type="text">
+                            <input name="idproducto" id="idproducto" placeholder="" class="form-control" type="hidden">
+                            <input name="imagenActual" id="imagenActual" placeholder="" class="form-control" type="hidden">
                             <div class="form-group">
                                 <label for="nombreE"><span style="color:red;"> * </span>Nombre</label>
                                 <input id="nombreE" class="form-control" type="text" name="nombreE" required>
@@ -327,8 +328,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Seleccione la imagen en <span style="color: red;">formato .jpg o .png</span></label>
-                                <input type="file" class="form-control-file border" name="imagenProductoE" id="imagenProductoE" class="imagenProductoE" required>
-                                <img src="vistas/img/default-150x150.png" class="img-thumbnail previsualizarE" width="100px">
+                                <input type="file" class="form-control-file border" name="imagenProductoE" id="imagenProductoE" class="imagenProductoE">
+                                <img src="" class="img-thumbnail previsualizarE" id="previsualizarE" width="100px">
                             </div>
                         </div>
                     </div>
@@ -339,7 +340,9 @@
                 </div>
                 <?php
 
-                
+                $editar = new ControladorProducto();
+                $editar->ctrEditarProducto();
+
                 ?>
             </form>
         </div>

@@ -39,7 +39,7 @@ class ModeloProducto extends Conexion
         $pdo->bindParam(":stock", $datos["stock"], PDO::PARAM_STR);
         $pdo->bindParam(":estado", $datos["estado"], PDO::PARAM_STR);
         $pdo->bindParam(":imagen", $datos["imagen"], PDO::PARAM_STR);
-        $pdo->bindParam(":codigobarras", $datos["codigobarras"], PDO::PARAM_STR);        
+        $pdo->bindParam(":codigobarras", $datos["codigobarras"], PDO::PARAM_STR);
         $pdo->bindParam(":idproveedor", $datos["idproveedor"], PDO::PARAM_STR);
 
         if ($pdo->execute()) {
@@ -66,5 +66,29 @@ class ModeloProducto extends Conexion
         }
     }
 
+    static public function mdlActualizarProducto($tablaDB, $datosC)
+    {
+        $pdo = Conexion::conectar()->prepare("UPDATE $tablaDB SET nombre = :nombre, descripcion = :descripcion, 
+        idcategoria = :idcategoria, precio = :precio, costo = :costo, isv =:isv, stock=:stock, estado=:estado, 
+        imagen=:imagen, codigo_barras = :codigoBarras, idproveedor =:idproveedor WHERE idproducto = :id");
 
+        $pdo->bindParam(":id", $datosC["id"], PDO::PARAM_INT);
+        $pdo->bindParam(":nombre", $datosC["nombre"], PDO::PARAM_STR);
+        $pdo->bindParam(":descripcion", $datosC["descripcion"], PDO::PARAM_STR);
+        $pdo->bindParam(":idcategoria", $datosC["idcategoria"], PDO::PARAM_STR);
+        $pdo->bindParam(":precio", $datosC["precio"], PDO::PARAM_STR);
+        $pdo->bindParam(":costo", $datosC["costo"], PDO::PARAM_STR);
+        $pdo->bindParam(":isv", $datosC["isv"], PDO::PARAM_STR);
+        $pdo->bindParam(":stock", $datosC["stock"], PDO::PARAM_STR);
+        $pdo->bindParam(":estado", $datosC["estado"], PDO::PARAM_STR);
+        $pdo->bindParam(":imagen", $datosC["imagen"], PDO::PARAM_STR);
+        $pdo->bindParam(":codigoBarras", $datosC["codigoBarras"], PDO::PARAM_STR);
+        $pdo->bindParam(":idproveedor", $datosC["idproveedor"], PDO::PARAM_STR);
+
+        if ($pdo->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

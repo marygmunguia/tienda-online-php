@@ -60,14 +60,14 @@ $(".tablas").on("click", ".eliminarProducto", function () {
 
 
 
-$(".tablas").on("click", ".EditarProveedor", function () {
+$(".tablas").on("click", ".editarProducto", function () {
   var id = $(this).attr("id");
   var datos = new FormData();
 
-  datos.append("idproveedor", id);
+  datos.append("idproducto", id);
 
   $.ajax({
-    url: "ajax/proveedores.ajax.php",
+    url: "ajax/productos.ajax.php",
     method: "POST",
     data: datos,
     cache: false,
@@ -76,19 +76,64 @@ $(".tablas").on("click", ".EditarProveedor", function () {
     dataType: "json",
 
     success: function (respuesta) {
-      $("#idproveedorE").val(respuesta["idproveedor"]);
-      $("#rtnE").val(respuesta["RTN"]);
+      $("#idproducto").val(respuesta["idproducto"]);
       $("#nombreE").val(respuesta["nombre"]);
-      $("#emailE").val(respuesta["email"]);
-      $("#sitioWebE").val(respuesta["sitioWeb"]);
-      $("#telefonoE").val(respuesta["telefono"]);
-      $("#nomContactoE").val(respuesta["nomContacto"]);
-      $("#emailContactoE").val(respuesta["emailContacto"]);
-      $("#celularContactoE").val(respuesta["celularContacto"]);
-      console.log(respuesta);
+      $("#descripcionE").val(respuesta["descripcion"]);
+      $("#idcategoriaE").val(respuesta["idcategoria"]);
+      $("#precioE").val(respuesta["precio"]);
+      $("#costoE").val(respuesta["costo"]);
+      $("#isvE").val(respuesta["isv"]);
+      $("#stockE").val(respuesta["stock"]);
+      $("#estadoE").val(respuesta["estado"]);
+      $("#codigoBarrasE").val(respuesta["codigo_barras"]);
+      $("#idproveedorE").val(respuesta["idproveedor"]);
+      $("#previsualizarE").attr("src", respuesta["imagen"]);
+      $("#imagenActual").val(respuesta["imagen"]);
     },
     error: function (respuesta) {
       console.log(respuesta);
     },
   });
+});
+
+
+
+/*=============================================
+SUBIENDO LA FOTO DEL USUARIO
+=============================================*/
+$("#imagenProductoE").change(function () {
+  var imagen = this.files[0];
+
+  /*=============================================
+        VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
+        =============================================*/
+
+  if (imagen["type"] != "image/jpeg" && imagen["type"] != "image/png") {
+    $(".imagenProductoE").val("");
+
+    swal({
+      title: "Error al subir la imagen",
+      text: "¡La imagen debe estar en formato JPG o PNG!",
+      type: "error",
+      confirmButtonText: "¡Cerrar!",
+    });
+  } else if (imagen["size"] > 2000000) {
+    $(".imagenProductoE").val("");
+
+    swal({
+      title: "Error al subir la imagen",
+      text: "¡La imagen no debe pesar más de 2MB!",
+      type: "error",
+      confirmButtonText: "¡Cerrar!",
+    });
+  } else {
+    var datosImagen = new FileReader();
+    datosImagen.readAsDataURL(imagen);
+
+    $(datosImagen).on("load", function (event) {
+      var rutaImagen = event.target.result;
+
+      $(".previsualizarE").attr("src", rutaImagen);
+    });
+  }
 });
