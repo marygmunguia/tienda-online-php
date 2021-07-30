@@ -62,9 +62,9 @@ class ModeloUsuarios extends Conexion
     static public function mdlActualizarUsuario($tablaDB, $datosC)
     {
         $pdo = Conexion::conectar()->prepare("UPDATE $tablaDB SET nombre = :nombre, 
-        email = :email, estado = :estado, tipo = :tipo, imagen = :imagen WHERE idusuario = :id");
+        email = :email, estado = :estado, tipo = :tipo, imagen = :imagen WHERE idusuario = :idUsuario");
 
-        $pdo->bindParam(":id", $datosC["id"], PDO::PARAM_INT);
+        $pdo->bindParam(":idUsuario", $datosC["idUsuario"], PDO::PARAM_INT);
         $pdo->bindParam(":nombre", $datosC["nombre"], PDO::PARAM_STR);
         $pdo->bindParam(":email", $datosC["email"], PDO::PARAM_STR);
         $pdo->bindParam(":estado", $datosC["estado"], PDO::PARAM_STR);

@@ -27,8 +27,8 @@ class ModeloProducto extends Conexion
     static public function mdlIngresarProducto($tabla, $datos)
     {
 
-        $pdo = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, descripcion, idcategoria, precio, costo, isv, stock, estado, imagen, codigo_barras)
-         VALUES (:nombre, :descripcion, :idcategoria, :precio, :costo, :isv, :stock, :estado, :imagen, :codigobarras)");
+        $pdo = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, descripcion, idcategoria, precio, costo, isv, stock, estado, imagen, codigo_barras, idproveedor)
+         VALUES (:nombre, :descripcion, :idcategoria, :precio, :costo, :isv, :stock, :estado, :imagen, :codigobarras, :idproveedor)");
 
         $pdo->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
         $pdo->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
@@ -39,7 +39,8 @@ class ModeloProducto extends Conexion
         $pdo->bindParam(":stock", $datos["stock"], PDO::PARAM_STR);
         $pdo->bindParam(":estado", $datos["estado"], PDO::PARAM_STR);
         $pdo->bindParam(":imagen", $datos["imagen"], PDO::PARAM_STR);
-        $pdo->bindParam(":codigobarras", $datos["codigobarras"], PDO::PARAM_STR);
+        $pdo->bindParam(":codigobarras", $datos["codigobarras"], PDO::PARAM_STR);        
+        $pdo->bindParam(":idproveedor", $datos["idproveedor"], PDO::PARAM_STR);
 
         if ($pdo->execute()) {
 
@@ -49,4 +50,21 @@ class ModeloProducto extends Conexion
             return false;
         }
     }
+
+
+    static public function mdlEliminarProducto($tablaDB, $id)
+    {
+
+        $pdo = Conexion::conectar()->prepare("DELETE FROM $tablaDB WHERE idproducto = :id");
+
+        $pdo->bindParam(":id", $id, PDO::PARAM_STR);
+
+        if ($pdo->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }

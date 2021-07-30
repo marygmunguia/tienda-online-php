@@ -154,7 +154,7 @@ class ControladorUsuario
 					swal({
 
 						type: "success",
-						title: "¡El registro se ha guardado de forma exitosa!",
+						title: "¡El registro se ha actualizado de forma exitosa!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar"
 
@@ -382,4 +382,138 @@ class ControladorUsuario
 	}
 
 
+	public static function ctrActualizarUsuario()
+	{
+		if (isset($_POST["nombreE"])) {
+
+			$ruta = $_POST["FotoActual"];
+
+			if (isset($_FILES["imagenNuevaE"]["tmp_name"]) && !empty($_FILES["imagenNuevaE"]["tmp_name"])) {
+
+				list($ancho, $alto) = getimagesize($_FILES["imagenNuevaE"]["tmp_name"]);
+
+				$nuevoAncho = 500;
+				$nuevoAlto = 500;
+
+				/*=============================================
+					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+					=============================================*/
+
+				$directorio = "vistas/img/usuarios";
+
+				/*=============================================
+					PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BD
+					=============================================*/
+
+				if (!empty($_POST["FotoActual"])) {
+
+					unlink($_POST["FotoActual"]);
+				} else {
+
+					mkdir($directorio, 0755);
+				}
+
+				/*=============================================
+					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+					=============================================*/
+
+				if ($_FILES["imagenNuevaE"]["type"] == "image/jpeg") {
+
+					/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+					$aleatorio = mt_rand(100, 9999);
+
+					$ruta = "vistas/img/usuarios/" . $aleatorio . ".jpg";
+
+					$origen = imagecreatefromjpeg($_FILES["imagenNuevaE"]["tmp_name"]);
+
+					$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+					imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+					imagejpeg($destino, $ruta);
+				}
+
+				if ($_FILES["imagenNuevaE"]["type"] == "image/png") {
+
+					/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+					$aleatorio = mt_rand(100, 9999);
+
+					$ruta = "vistas/img/usuarios/" . $aleatorio . ".png";
+
+					$origen = imagecreatefrompng($_FILES["imagenNuevaE"]["tmp_name"]);
+
+					$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+					imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+					imagepng($destino, $ruta);
+				}
+			}
+
+			$tabla = "usuarios";
+
+			$datos = array(
+				"idUsuario" => $_POST["idUsuarioE"],
+				"nombre" => $_POST["nombreE"],
+				"email" => $_POST["emailE"],
+				"tipo" => $_POST["tipoE"],
+				"estado" => $_POST["estadoE"],
+				"imagen" => $ruta
+			);
+
+			$respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $datos);
+
+			if ($respuesta == true) {
+				echo '<script>
+
+					swal({
+
+						type: "success",
+						title: "¡El registro se ha actualizado de forma exitosa!",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+
+					}).then(function(result){
+
+						if(result.value){
+						
+							window.location = "usuarios";
+
+						}
+
+					});
+				
+
+					</script>';
+			} else {
+				echo '<script>
+
+					swal({
+
+						type: "error",
+						title: "¡El registro NO se ha actualizado correctamente!",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+
+					}).then(function(result){
+
+						if(result.value){
+						
+							window.location = "usuarios";
+
+						}
+
+					});
+				
+
+					</script>';
+			}
+		}
+	}
 }

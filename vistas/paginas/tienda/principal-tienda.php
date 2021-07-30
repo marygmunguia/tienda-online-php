@@ -26,7 +26,7 @@
                     <img class="card-img-top" src="<?php echo $values["imagen"]; ?>" alt="<?php echo $values["nombre"]; ?>" width="150px">
                     <div class="card-body">
                         <div class="pb-2"><span class="badge badge-dark"> <?php echo $respuesta["nombre"]; ?></span></div>
-                        <h4 class="card-title"><?php echo $values["nombre"]; ?></h4>
+                        <h4 class="card-title"><?php echo $values["nombre"]; ?></h4><br>
                         <div class="pt-3">
                             <p>Precio: <b class="text-danger"><?php echo $values["precio"]; ?> Lps</b></p>
                         </div>

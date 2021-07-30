@@ -34,7 +34,7 @@ class ControladorProducto
 					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
 					=============================================*/
 
-                $directorio = "vistas/img/usuarios/" . $_POST["nombre"];
+                $directorio = "vistas/img/usuarios/productos";
 
                 mkdir($directorio, 0755);
 
@@ -48,9 +48,9 @@ class ControladorProducto
 						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
 						=============================================*/
 
-                    $aleatorio = mt_rand(100, 999);
+                    $aleatorio = mt_rand(100, 99999);
 
-                    $ruta = "vistas/img/usuarios/" . $_POST["nombre"] . "/" . $aleatorio . ".jpg";
+                    $ruta = "vistas/img/usuarios/productos/" . $aleatorio . ".jpg";
 
                     $origen = imagecreatefromjpeg($_FILES["imagenProducto"]["tmp_name"]);
 
@@ -93,6 +93,7 @@ class ControladorProducto
                 "stock" => $_POST["stock"],
                 "estado" => $_POST["estado"],
                 "codigoBarras" => $_POST["codigoBarras"],
+                "idproveedor" => $_POST["idproveedor"],
                 "imagen" => $ruta
             );
 
@@ -145,4 +146,64 @@ class ControladorProducto
             }
         }
     }
+
+
+    static public function ctrEliminarProducto()
+    {
+        if (isset($_POST["idproductoDelete"])) {
+
+            $tablaDB = "productos";
+
+            $id = $_POST["idproductoDelete"];
+
+            $resultado = ModeloProducto::mdlEliminarProducto($tablaDB, $id);
+
+            if ($resultado == true) {
+                echo '<script>
+
+					swal({
+
+						type: "success",
+						title: "¡El producto ha sido eliminado correctamente!",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+
+					}).then(function(result){
+
+						if(result.value){
+						
+							window.location = "productos";
+
+						}
+
+					});
+				
+
+					</script>';
+            } else {
+                echo '<script>
+
+					swal({
+
+						type: "success",
+						title: "¡El producto NO ha sido eliminado correctamente!",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+
+					}).then(function(result){
+
+						if(result.value){
+						
+							window.location = "productos";
+
+						}
+
+					});
+				
+
+					</script>';
+            }
+        }
+    }
+
 }

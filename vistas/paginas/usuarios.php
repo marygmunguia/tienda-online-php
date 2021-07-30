@@ -208,7 +208,7 @@
                     </div>
                     <div class="form-group">
                         <label>Seleccione la imagen en <span style="color: red;">formato .jpg o .png</span></label>
-                        <input type="file" class="form-control-file border" name="imagenNuevaE" id="imagenNuevaE" class="imagenNuevaE" required>
+                        <input type="file" class="form-control-file border" name="imagenNuevaE" id="imagenNuevaE" class="imagenNuevaE">
                         <img src="vistas/img/default-150x150.png" class="img-thumbnail previsualizarE" width="100px">
                     </div>
                 </div>
@@ -220,8 +220,8 @@
 
         <?php
 
-         $crearUsuario = new ControladorUsuario();
-         $crearUsuario->ctrCrearUsuario();
+         $ActualizarUsuario = new ControladorUsuario();
+         $ActualizarUsuario->ctrActualizarUsuario();
 
         ?>
 

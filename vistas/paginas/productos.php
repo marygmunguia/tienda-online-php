@@ -147,7 +147,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="idcategoria"><span style="color:red;"> * </span>Proveedor</label>
+                                <label for="idproveedor"><span style="color:red;"> * </span>Proveedor</label>
                                 <select name="idproveedor" id="idproveedor" class="form-control">
                                     <?php
                                     $columna = null;
@@ -202,6 +202,144 @@
                 $crearProducto = new ControladorProducto();
                 $crearProducto->ctrIngresarProducto();
 
+                ?>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" tabindex="-1" id="eliminarProducto" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form role="form" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title">Eliminar producto del sistema</h5>
+                </div>
+                <div class="modal-body">
+                    <p>¿Deseas eliminar definiticamente el registro?</p>
+                    <br />
+
+                    <input name="idproductoDelete" id="idproductoDelete" placeholder="" class="form-control" type="hidden">
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Eliminar nuevo</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+
+                <?php
+
+                $eliminar = new ControladorProducto();
+                $eliminar->ctrEliminarProducto();
+
+                ?>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="editarProducto" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Editar información de Producto</h4>
+            </div>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                        <input name="idproducto" id="idproducto" placeholder="" class="form-control" type="text">
+                            <div class="form-group">
+                                <label for="nombreE"><span style="color:red;"> * </span>Nombre</label>
+                                <input id="nombreE" class="form-control" type="text" name="nombreE" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="descripcionE">Descripción</label>
+                                <textarea class="form-control" name="descripcionE" id="descripcionE" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="idcategoriaE"><span style="color:red;"> * </span>Categoría</label>
+                                <select name="idcategoriaE" id="idcategoriaE" class="form-control">
+                                    <?php
+                                    $columna = null;
+                                    $valor = null;
+                                    $consulta = ControladorCategoria::ctrMostrarCategorias($columna, $valor);
+                                    foreach ($consulta as $key => $valor) {
+                                    ?>
+                                        <option value="<?php echo $valor["idcategoria"]; ?>"><?php echo $valor["nombre"]; ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-12 col-lg-6">
+                                    <label for="precioE"><span style="color:red;"> * </span>Precio</label>
+                                    <input id="precioE" class="form-control" type="number" step="0.01" name="precioE">
+                                </div>
+                                <div class="form-group col-sm-12 col-lg-6">
+                                    <label for="costoE"><span style="color:red;"> * </span>Costo</label>
+                                    <input id="costoE" class="form-control" type="number" step="0.01" name="costoE">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="idproveedorE"><span style="color:red;"> * </span>Proveedor</label>
+                                <select name="idproveedorE" id="idproveedorE" class="form-control">
+                                    <?php
+                                    $columna = null;
+                                    $valor = null;
+                                    $consulta = ControladorProveedor::ctrMostrarProveedores($columna, $valor);
+                                    foreach ($consulta as $key => $valor) {
+                                    ?>
+                                        <option value="<?php echo $valor["idproveedor"]; ?>"><?php echo $valor["nombre"]; ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="isvE"><span style="color:red;"> * </span>ISV</label>
+                                <select name="isvE" id="isvE" class="form-control">
+                                    <option value="S">Impuesto incluido</option>
+                                    <option value="N">Impuesto NO incluido</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="stockE"><span style="color:red;"> * </span>Stock</label>
+                                <input id="stockE" class="form-control" type="number" name="stockE">
+                            </div>
+                            <div class="form-group">
+                                <label for="estadoE">Estado</label>
+                                <select name="estadoE" id="estadoE" class="form-control">
+                                    <option value="N">Normal</option>
+                                    <option value="D">Descontinuado</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="codigoBarrasE">Código de Barras</label>
+                                <input id="codigoBarrasE" class="form-control" type="text" name="codigoBarrasE">
+                            </div>
+                            <div class="form-group">
+                                <label>Seleccione la imagen en <span style="color: red;">formato .jpg o .png</span></label>
+                                <input type="file" class="form-control-file border" name="imagenProductoE" id="imagenProductoE" class="imagenProductoE" required>
+                                <img src="vistas/img/default-150x150.png" class="img-thumbnail previsualizarE" width="100px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-danger">Guardar</button>
+                </div>
+                <?php
+
+                
                 ?>
             </form>
         </div>
