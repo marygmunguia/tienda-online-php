@@ -170,15 +170,15 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input name="idUsuarioE" id="idUsuarioE" placeholder="" class="form-control" type="text">
-                        <input name="FotoActual" id="FotoActual" placeholder="" class="form-control" type="text">
+                        <input name="idUsuarioE" id="idUsuarioE" placeholder="" class="form-control" type="hidden">
+                        <input name="FotoActual" id="FotoActual" placeholder="" class="form-control" type="hidden">
                     </div>
                     <div class="form-group">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Nombre completo" name="nombreE" required>
+                            <input type="text" class="form-control" placeholder="Nombre completo" name="nombreE" id="nombreE" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -220,8 +220,8 @@
 
         <?php
 
-        // $crearUsuario = new ControladorUsuario();
-        // $crearUsuario->ctrCrearUsuario();
+         $crearUsuario = new ControladorUsuario();
+         $crearUsuario->ctrCrearUsuario();
 
         ?>
 

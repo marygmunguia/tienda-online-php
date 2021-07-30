@@ -7,9 +7,9 @@ class UsuariosAjax
 {
     public $idUsuario;
 
-    public function EUsuariosAjax()
+    public function UsuarioAjax()
     {
-        $columna = "idusuarios";
+        $columna = "idusuario";
         $valor = $this->idUsuario;
 
         $resultado = ControladorUsuario::ctrMostrarUsuarios($columna, $valor);
@@ -49,5 +49,5 @@ if (isset($_POST["validarUsuario"])) {
 if (isset($_POST["idUsuario"])) {
     $eS = new UsuariosAjax();
     $eS -> idUsuario = $_POST["idUsuario"];
-    $eS -> EUsuariosAjax();
+    $eS -> UsuarioAjax();
 }

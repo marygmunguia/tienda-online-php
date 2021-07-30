@@ -37,6 +37,7 @@ session_start();
     <!-- summernote -->
     <link rel="stylesheet" href="vistas/plugins/summernote/summernote-bs4.min.css">
 
+
     <!-- JS -->
     <!-- jQuery -->
     <script src="vistas/plugins/jquery/jquery.min.js"></script>
@@ -90,9 +91,6 @@ session_start();
 
     <?php
 
-
-
-
     if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
 
         if (isset($_GET["ruta"])) {
@@ -135,7 +133,7 @@ session_start();
                 include 'vistas/modulos/menuadmin.php';
 
                 if ($_GET["ruta"] == "login") {
-                    
+
                     include 'vistas/paginas/home.php';
                 } else {
                     include 'vistas/modulos/404.php';
@@ -178,9 +176,11 @@ session_start();
 
     ?>
 
+
     <script src="vistas/js/main.js"></script>
     <script src="vistas/js/categorias.js"></script>
     <script src="vistas/js/producto.js"></script>
+    <script src="vistas/js/proveedores.js"></script>
 
 </body>
 

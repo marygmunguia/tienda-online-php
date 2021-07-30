@@ -30,8 +30,6 @@ $(function () {
 });
 
 
-
-
 /*=============================================
 EDITAR USUARIO
 =============================================*/
@@ -44,7 +42,7 @@ $("#TB").on("click", ".editarUsuario", function () {
 
   $.ajax({
 
-      url: "ajax/usuario.ajax.php",
+      url: "ajax/usuarios.ajax.php",
       method: "POST",
       data: datos,
       dataType: "json",
@@ -56,12 +54,12 @@ $("#TB").on("click", ".editarUsuario", function () {
 
           $("#idUsuarioE").val(resultado["idusuario"]);
           $("#nombreE").val(resultado["nombre"]);
-          $("#emailE").val(resultado["email"]);
+          $("#emailUsuario").val(resultado["email"]);
           $("#estadoE").val(resultado["estado"]);
           $("#tipoE").val(resultado["tipo"]);
           $("#FotoActual").val(resultado["imagen"]);
+          $(".previsualizarE").attr("src", resultado["imagen"]);
       }
-
   })
 
 })
