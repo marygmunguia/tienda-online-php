@@ -90,4 +90,15 @@ class ControladorVentas
             </script>';
         }
     }
+
+
+    static public function ctrConsultarVentas($columna, $valor)
+    {
+
+        $tablaDB = "ventas_realizadas";
+
+        $resultado = ModeloVentas::mdlConsultaVenta($tablaDB, $columna, $valor);
+
+        return $resultado;
+    }
 }

@@ -15,3 +15,11 @@ class Conexion{
 	}
 
 }
+
+
+$mysqli = new mysqli("localhost","root","","allonlinehn");
+
+if(mysqli_connect_errno()){
+    echo 'CONEXION FALLIDA: ', mysqli_connect_error();
+    exit();
+}

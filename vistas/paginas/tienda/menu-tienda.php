@@ -11,6 +11,9 @@
                     <a class="nav-link" href="tienda">Principal</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="buscador">Buscar</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="carrito">Carrito(<?php if(isset($_SESSION["carrito"])){
                         echo count($_SESSION["carrito"]);
                     }else{

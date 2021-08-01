@@ -128,6 +128,7 @@ date_default_timezone_set('America/Tegucigalpa');
                     $_GET["ruta"] == "tienda" ||
                     $_GET["ruta"] == "detalle" ||
                     $_GET["ruta"] == "completo" ||
+                    $_GET["ruta"] == "buscador" ||
                     $_GET["ruta"] == "carrito"
                 ) {
                     include 'vistas/paginas/' . $_GET["ruta"] . '.php';
@@ -186,6 +187,7 @@ date_default_timezone_set('America/Tegucigalpa');
                     $_GET["ruta"] == "tienda" ||
                     $_GET["ruta"] == "detalle" ||
                     $_GET["ruta"] == "completo" ||
+                    $_GET["ruta"] == "buscador" ||
                     $_GET["ruta"] == "carrito"
                 ) {
                     include 'vistas/paginas/' . $_GET["ruta"] . '.php';
@@ -230,6 +232,7 @@ date_default_timezone_set('America/Tegucigalpa');
                 $_GET["ruta"] == "registro" ||
                 $_GET["ruta"] == "completo" ||
                 $_GET["ruta"] == "detalle" ||
+                $_GET["ruta"] == "buscador" ||
                 $_GET["ruta"] == "carrito"
             ) {
                 include 'vistas/paginas/' . $_GET["ruta"] . '.php';
@@ -249,6 +252,7 @@ date_default_timezone_set('America/Tegucigalpa');
     <script src="vistas/js/categorias.js"></script>
     <script src="vistas/js/producto.js"></script>
     <script src="vistas/js/proveedores.js"></script>
+    <script src="vistas/js/buscador.js"></script>
 
 </body>
 
