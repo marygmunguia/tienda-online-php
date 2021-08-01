@@ -253,6 +253,7 @@ date_default_timezone_set('America/Tegucigalpa');
     <script src="vistas/js/producto.js"></script>
     <script src="vistas/js/proveedores.js"></script>
     <script src="vistas/js/buscador.js"></script>
+    <script src="vistas/js/ventas.js"></script>
 
 </body>
 
