@@ -82,7 +82,7 @@
                                 <p>Proveedores</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="pedidos" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pedidos</p>
@@ -93,7 +93,7 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Ingresos</p>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -111,12 +111,12 @@
                                 <p>Facturación</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="clientes" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Clientes</p>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <li class="nav-item">

@@ -64,9 +64,9 @@ include 'vistas/paginas/tienda/menu-tienda.php';
               </div>
               <div class="row">
                 <div class="col-6">
-                  <p class="lead">Métodos de Pago:</p><!-- 
-                  <img src="vistas/img/paypal.png" alt="Paypal" width="80px">&nbsp; -->
-                  <img src="vistas/img/efectivo.png" alt="Efectivo" width="60px">
+                  <p class="lead">Métodos de Pago:</p> 
+                  <img src="vistas/img/paypal.png" alt="Paypal" width="80px">&nbsp;
+                 <!--  <img src="vistas/img/efectivo.png" alt="Efectivo" width="60px"> -->
 
                   <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
                     No olvides revisar nuestras políticas de compra <a href="#">aquí</a>
@@ -79,7 +79,7 @@ include 'vistas/paginas/tienda/menu-tienda.php';
                     <table class="table">
                       <tr>
                         <th style="width:50%">Subtotal:</th>
-                        <td><?php echo number_format($_SESSION["subtotal"], 2); ?> Lps</td>
+                        <td><?php echo $_SESSION["subtotal"]; ?> Lps</td>
                       </tr>
                       <tr>
                         <th style="width:50%">Impuesto sobre venta:</th>
@@ -87,7 +87,7 @@ include 'vistas/paginas/tienda/menu-tienda.php';
                       </tr>
                       <tr>
                         <th style="width:50%">Total a Pagar:</th>
-                        <td><?php echo number_format($_SESSION["total"], 2); ?> Lps</td>
+                        <td><?php echo $_SESSION["total"]; ?> Lps</td>
                       </tr>
                     </table>
                   </div>
@@ -96,8 +96,8 @@ include 'vistas/paginas/tienda/menu-tienda.php';
 
               <div class="row no-print">
                 <div class="col-12">
-                  <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Completar Compra
-                  </button>
+                  <a href="detalle" class="btn btn-success btn-block float-right"><i class="far fa-credit-card"></i>  Completar Compra
+                    </a>
                 </div>
               </div>
             <?php

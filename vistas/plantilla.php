@@ -93,38 +93,60 @@ session_start();
 
     if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
 
-        if (isset($_GET["ruta"])) {
-            if (
-                $_GET["ruta"] == "home" ||
-                $_GET["ruta"] == "perfil" ||
-                $_GET["ruta"] == "productos" ||
-                $_GET["ruta"] == "categorias" ||
-                $_GET["ruta"] == "usuarios" ||
-                $_GET["ruta"] == "pedidos" ||
-                $_GET["ruta"] == "ingresos" ||
-                $_GET["ruta"] == "proveedores" ||
-                $_GET["ruta"] == "facturacion" ||
-                $_GET["ruta"] == "clientes" ||
-                $_GET["ruta"] == "cerrarSesion" ||
-                $_GET["ruta"] == "reportes"
-            ) {
+        if ($_SESSION["tipo"] == "A" or $_SESSION["tipo"] == "E") {
 
-                echo '<div class="wrapper">';
+            if (isset($_GET["ruta"])) {
+                if (
+                    $_GET["ruta"] == "home" ||
+                    $_GET["ruta"] == "perfil" ||
+                    $_GET["ruta"] == "productos" ||
+                    $_GET["ruta"] == "categorias" ||
+                    $_GET["ruta"] == "usuarios" ||
+                    $_GET["ruta"] == "pedidos" ||
+                    $_GET["ruta"] == "ingresos" ||
+                    $_GET["ruta"] == "proveedores" ||
+                    $_GET["ruta"] == "facturacion" ||
+                    $_GET["ruta"] == "clientes" ||
+                    $_GET["ruta"] == "cerrarSesion" ||
+                    $_GET["ruta"] == "reportes"
+                ) {
 
-                include 'vistas/modulos/cabecera.php';
+                    echo '<div class="wrapper">';
 
-                include 'vistas/modulos/menuadmin.php';
+                    include 'vistas/modulos/cabecera.php';
 
-                include 'vistas/paginas/' . $_GET["ruta"] . '.php';
+                    include 'vistas/modulos/menuadmin.php';
 
-                include 'vistas/modulos/footer.php';
+                    include 'vistas/paginas/' . $_GET["ruta"] . '.php';
 
-                echo '</div>';
-            } elseif (
-                $_GET["ruta"] == "tienda" ||
-                $_GET["ruta"] == "carrito"
-            ) {
-                include 'vistas/paginas/' . $_GET["ruta"] . '.php';
+                    include 'vistas/modulos/footer.php';
+
+                    echo '</div>';
+                } elseif (
+                    $_GET["ruta"] == "tienda" ||
+                    $_GET["ruta"] == "detalle" ||
+                    $_GET["ruta"] == "completo" ||
+                    $_GET["ruta"] == "carrito"
+                ) {
+                    include 'vistas/paginas/' . $_GET["ruta"] . '.php';
+                } else {
+                    echo '<div class="wrapper">';
+
+                    include 'vistas/modulos/cabecera.php';
+
+                    include 'vistas/modulos/menuadmin.php';
+
+                    if ($_GET["ruta"] == "login") {
+
+                        include 'vistas/paginas/home.php';
+                    } else {
+                        include 'vistas/modulos/404.php';
+                    }
+
+                    include 'vistas/modulos/footer.php';
+
+                    echo '</div>';
+                }
             } else {
                 echo '<div class="wrapper">';
 
@@ -132,29 +154,70 @@ session_start();
 
                 include 'vistas/modulos/menuadmin.php';
 
-                if ($_GET["ruta"] == "login") {
-
-                    include 'vistas/paginas/home.php';
-                } else {
-                    include 'vistas/modulos/404.php';
-                }
+                include 'vistas/paginas/home.php';
 
                 include 'vistas/modulos/footer.php';
 
                 echo '</div>';
             }
         } else {
-            echo '<div class="wrapper">';
 
-            include 'vistas/modulos/cabecera.php';
+            if (isset($_GET["ruta"])) {
+                if (
+                    $_GET["ruta"] == "perfil" ||
+                    $_GET["ruta"] == "compras" ||
+                    $_GET["ruta"] == "cerrarSesion"
+                ) {
 
-            include 'vistas/modulos/menuadmin.php';
+                    echo '<div class="wrapper">';
 
-            include 'vistas/paginas/home.php';
+                    include 'vistas/modulos/cabecera.php';
 
-            include 'vistas/modulos/footer.php';
+                    include 'vistas/modulos/menucliente.php';
 
-            echo '</div>';
+                    include 'vistas/paginas/' . $_GET["ruta"] . '.php';
+
+                    include 'vistas/modulos/footer.php';
+
+                    echo '</div>';
+                } elseif (
+                    $_GET["ruta"] == "tienda" ||
+                    $_GET["ruta"] == "detalle" ||
+                    $_GET["ruta"] == "completo" ||
+                    $_GET["ruta"] == "carrito"
+                ) {
+                    include 'vistas/paginas/' . $_GET["ruta"] . '.php';
+                } else {
+                    echo '<div class="wrapper">';
+
+                    include 'vistas/modulos/cabecera.php';
+
+                    include 'vistas/modulos/menucliente.php';
+
+                    if ($_GET["ruta"] == "login") {
+
+                        include 'vistas/paginas/home.php';
+                    } else {
+                        include 'vistas/modulos/404.php';
+                    }
+
+                    include 'vistas/modulos/footer.php';
+
+                    echo '</div>';
+                }
+            } else {
+                echo '<div class="wrapper">';
+
+                include 'vistas/modulos/cabecera.php';
+
+                include 'vistas/modulos/menuadmin.php';
+
+                include 'vistas/paginas/home.php';
+
+                include 'vistas/modulos/footer.php';
+
+                echo '</div>';
+            }
         }
     } else {
 
@@ -163,6 +226,8 @@ session_start();
                 $_GET["ruta"] == "tienda" ||
                 $_GET["ruta"] == "login" ||
                 $_GET["ruta"] == "registro" ||
+                $_GET["ruta"] == "completo" ||
+                $_GET["ruta"] == "detalle" ||
                 $_GET["ruta"] == "carrito"
             ) {
                 include 'vistas/paginas/' . $_GET["ruta"] . '.php';
@@ -170,6 +235,7 @@ session_start();
                 include 'vistas/modulos/404-tienda.php';
             }
         } else {
+
             include 'vistas/paginas/tienda.php';
         }
     }
