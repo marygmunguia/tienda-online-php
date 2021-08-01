@@ -8,9 +8,9 @@ $pago = $_SESSION["total"] / $dolar;
 
 $idSesion = session_id();
 
-?>
-
-<div class="jumbotron text-center">
+if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
+    ?>
+    <div class="jumbotron text-center">
     <h1 class="display-4">¡Último Paso!</h1>
     <p class="lead">Estás a punto de pagar con PayPal la cantidad de:</p>
     <hr class="my-4">
@@ -43,8 +43,12 @@ $idSesion = session_id();
             // Finalize the transaction
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(orderData) {
-                    window.location = "completo?dato=" + data.orderID;
-                    console.log(data);
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    if (transaction.status = "COMPLETED") {
+                        window.location = "completo?dato=" + transaction.id;
+                    } else {
+                        window.location = "tienda";
+                    }
                 });
             },
 
@@ -57,3 +61,26 @@ $idSesion = session_id();
     </script>
 
 </div>
+
+<?php
+
+}else{
+    echo'<script>
+
+            swal({
+                  type: "error",
+                  title: "Registrate o Inicia Sesión para realizar tu compra!",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar"
+                  }).then(function(result){
+                            if (result.value) {
+
+                            window.location = "registro";
+
+                            }
+                        })
+
+            </script>';
+}
+
+?>

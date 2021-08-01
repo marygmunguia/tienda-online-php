@@ -1,5 +1,11 @@
 <?php
 
 $url = $_SERVER["REQUEST_URI"];
-$ordenID = substr($url, 15);
+$IdTransaccion = substr($url, 15);
 
+
+$_SESSION["IdTransaccion"] = $IdTransaccion;
+
+
+$venta = new ControladorVentas();
+$venta -> ctrCrearVenta();
