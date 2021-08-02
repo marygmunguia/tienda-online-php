@@ -168,6 +168,7 @@ date_default_timezone_set('America/Tegucigalpa');
 
             if (isset($_GET["ruta"])) {
                 if (
+                    $_GET["ruta"] == "home-cliente" ||
                     $_GET["ruta"] == "perfil" ||
                     $_GET["ruta"] == "compras" ||
                     $_GET["ruta"] == "cerrarSesion"
@@ -200,9 +201,13 @@ date_default_timezone_set('America/Tegucigalpa');
 
                     include 'vistas/modulos/menucliente.php';
 
-                    if ($_GET["ruta"] == "login") {
+                    if (
+                        $_GET["ruta"] == "login" ||
+                        $_GET["ruta"] == "home-cliente"
+                    ) {
 
-                        include 'vistas/paginas/home.php';
+
+                        include 'vistas/paginas/home-cliente.php';
                     } else {
                         include 'vistas/modulos/404.php';
                     }

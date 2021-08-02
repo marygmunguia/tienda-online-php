@@ -1,5 +1,3 @@
-
-
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
@@ -74,50 +72,58 @@
                         </div>
                         <div class="col-sm-12 col-lg-3"></div>
                         <div class="col-sm-12 col-lg-9">
-                            <div class="form-group">
-                                <h4>Dirección en entraga principal</h4>
-                            </div>
-                            <div class="form-group">
-                                <label>Dirección (Linea 1)</label>
-                                <input type="text" class="form-control" placeholder="" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Dirección (Linea 2)</label>
-                                <input type="text" class="form-control" placeholder="" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Ciudad</label>
-                                <input type="text" class="form-control" placeholder="" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>Departamento</label>
-                                <input type="text" class="form-control" placeholder="" disabled>
-                            </div>
-                            <div class="form-group">
-                                <label>País</label>
-                                <select class="form-control" disabled>
-                                    <option>Seleccione el país</option>
-                                    <option>Honduras</option>
-                                    <option>Estados Unidos</option>
-                                    <option>Nicaraguia</option>
-                                    <option>Guatemala</option>
-                                    <option>El Salvador</option>
-                                </select>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="">Teléfono</label>
-                                        <input id="" class="form-control" type="text" name="" disabled>
+                            <?php
+                            $columna = 'idusuario';
+                            $valor = $_SESSION["idusuario"];
+
+                            $consulta = ControladorUsuario::ctrConsultarDireccion($columna, $valor);
+
+                            if (empty($consulta) == false) {
+
+                            ?>
+
+                                <div class="form-group">
+                                    <h4>Dirección en entraga principal</h4>
+                                </div>
+                                <div class="form-group">
+                                    <label>Dirección (Linea 1)</label>
+                                    <input type="text" class="form-control" value="<?php echo $consulta["direccion1"]; ?>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Dirección (Linea 2)</label>
+                                    <input type="text" class="form-control" value="<?php echo $consulta["direccion2"]; ?>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Ciudad</label>
+                                    <input type="text" class="form-control" value="<?php echo $consulta["ciudad"]; ?>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Departamento</label>
+                                    <input type="text" class="form-control" value="<?php echo $consulta["departemento"]; ?>" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>País</label>
+                                    <select class="form-control" disabled>
+                                        <option><?php echo $consulta["pais"]; ?></option>
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="">Teléfono</label>
+                                            <input id="" class="form-control" type="text" value="<?php echo $consulta["telefono"]; ?>" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="">Celular</label>
+                                            <input id="" class="form-control" type="text" value="<?php echo $consulta["celular"]; ?>" disabled>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="">Celular</label>
-                                        <input id="" class="form-control" type="text" name="" disabled>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php
+                            }
+                            ?>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -215,9 +221,9 @@
                         <div class="form-group">
                             <label for="">Seleccione la imagen recuerda que debe de ser <span style="color: red;">formato .jpg o .png</span></label>
                             <div class="form-group">
-                                <input type="text" name="idUsuarioFoto" value="<?php echo $_SESSION["idusuario"]; ?>" />
+                                <input type="hidden" name="idUsuarioFoto" value="<?php echo $_SESSION["idusuario"]; ?>" />
                                 <input type="file" class="form-control-file border" name="imagenNueva" id="imagenNueva" required>
-                                <input type="text" name="fotoActual" value="<?php echo $_SESSION["imagen"]; ?>" />
+                                <input type="hidden" name="fotoActual" value="<?php echo $_SESSION["imagen"]; ?>" />
                                 <br /><br />
                                 <img src="<?php echo $_SESSION["imagen"]; ?>" alt="" class="previsualizar" width="150px" height="150px">
                             </div>
@@ -233,7 +239,7 @@
                 <?php
 
                 $cambiar = new ControladorUsuario();
-                $cambiar -> ctrCambiarFotoPerfil();
+                $cambiar->ctrCambiarFotoPerfil();
 
                 ?>
 
