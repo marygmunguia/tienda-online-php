@@ -213,13 +213,13 @@
                     <div class="box-body">
 
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Seleccione la imagen en <span style="color: red;">formato .jpg o .png</span></label>
+                            <label for="">Seleccione la imagen recuerda que debe de ser <span style="color: red;">formato .jpg o .png</span></label>
                             <div class="form-group">
-                                <input type="hidden" name="idUsuarioFoto" value="<?php echo $_SESSION["id_usuario"]; ?>" />
+                                <input type="text" name="idUsuarioFoto" value="<?php echo $_SESSION["idusuario"]; ?>" />
                                 <input type="file" class="form-control-file border" name="imagenNueva" id="imagenNueva" required>
-                                <input type="hidden" name="fotoActual" value="<?php echo $_SESSION["foto_perfil"]; ?>" />
+                                <input type="text" name="fotoActual" value="<?php echo $_SESSION["imagen"]; ?>" />
                                 <br /><br />
-                                <img src="<?php echo $_SESSION["foto_perfil"]; ?>" alt="" class="previsualizar" width="150px" height="150px">
+                                <img src="<?php echo $_SESSION["imagen"]; ?>" alt="" class="previsualizar" width="150px" height="150px">
                             </div>
                         </div>
 
@@ -227,14 +227,13 @@
                 </div>
 
                 <div class="modal-footer">
-
-                    <button type="submit" class="btn btn-1"> Guardar cambios</button>
-
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times-circle"></i> Cancelar</button>
+                    <button type="submit" class="btn btn-danger"> Guardar cambios</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times-circle"></i> Cancelar</button>
                 </div>
                 <?php
 
-
+                $cambiar = new ControladorUsuario();
+                $cambiar -> ctrCambiarFotoPerfil();
 
                 ?>
 

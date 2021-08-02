@@ -1,7 +1,7 @@
 <div class="container-fluid p-5">
-    <div class="jumbotron" style="background-image: url('vistas/img/photo1.png');">
-        <h1 class="text-white">Nuestros Productos</h1>
-        <p class="text-white">Todo lo que necesitas al alcance de tus manos.</p>
+    <div class="jumbotron" style="background-image: url('vistas/img/photo4.jpg');">
+        <h1 class="text-dark">Nuestros Productos</h1>
+        <p class="text-dark">Todo lo que necesitas al alcance de tus manos.</p>
     </div>
 
     <div class="row">

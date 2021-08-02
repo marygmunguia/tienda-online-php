@@ -96,7 +96,7 @@ include 'vistas/paginas/tienda/menu-tienda.php';
 
               <div class="row no-print">
                 <div class="col-12">
-                  <a href="detalle" class="btn btn-success btn-block float-right"><i class="far fa-credit-card"></i>  Completar Compra
+                  <a href="direccion" class="btn btn-success btn-block float-right"><i class="far fa-credit-card"></i>  Completar Compra
                     </a>
                 </div>
               </div>

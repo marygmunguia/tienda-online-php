@@ -78,5 +78,45 @@ class ModeloUsuarios extends Conexion
         }
     }
 
+     static public function mdlCambiarFotoPerfil($tablaDB, $id, $ruta)
+    {
+        $pdo = Conexion::conectar()->prepare("UPDATE $tablaDB SET imagen = :imagen WHERE idusuario = :idUsuario");
+
+        $pdo->bindParam(":idUsuario", $id, PDO::PARAM_INT);
+        $pdo->bindParam(":imagen", $ruta, PDO::PARAM_STR);
+
+        if ($pdo->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    static public function mdlIngresarDireccion($tablaDB, $datosC)
+    {
+
+        $pdo = Conexion::conectar()->prepare("INSERT INTO $tablaDB(idusuario, direccion1, direccion2, ciudad, departemento, pais, telefono, celular) VALUES 
+        (:idusuario, :direccion1, :direccion2, :ciudad, :departemento, :pais, :telefono, :celular)");
+
+        $pdo->bindParam(":idusuario", $datosC["idusuario"], PDO::PARAM_STR);
+        $pdo->bindParam(":direccion1", $datosC["direccion1"], PDO::PARAM_STR);
+        $pdo->bindParam(":direccion2", $datosC["direccion2"], PDO::PARAM_STR);
+        $pdo->bindParam(":ciudad", $datosC["ciudad"], PDO::PARAM_STR);
+        $pdo->bindParam(":departemento", $datosC["departemento"], PDO::PARAM_STR);
+        $pdo->bindParam(":pais", $datosC["pais"], PDO::PARAM_STR);
+        $pdo->bindParam(":telefono", $datosC["telefono"], PDO::PARAM_STR);
+        $pdo->bindParam(":celular", $datosC["celular"], PDO::PARAM_STR);
+
+        if ($pdo->execute()) {
+            return true;
+        }else{
+            return false;
+        }
+
+        return print_r(Conexion::conectar()->errorInfo());
+    }
+
+
 
 }

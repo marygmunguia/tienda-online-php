@@ -8,7 +8,7 @@ class ModeloProducto extends Conexion
     {
         if ($columna == null) {
 
-            $pdo = Conexion::conectar()->prepare("SELECT * FROM $tablaDB");
+            $pdo = Conexion::conectar()->prepare("SELECT * FROM $tablaDB ORDER BY rand()");
 
             $pdo->execute();
 

@@ -128,6 +128,7 @@ date_default_timezone_set('America/Tegucigalpa');
                     $_GET["ruta"] == "tienda" ||
                     $_GET["ruta"] == "detalle" ||
                     $_GET["ruta"] == "completo" ||
+                    $_GET["ruta"] == "direccion" ||
                     $_GET["ruta"] == "buscador" ||
                     $_GET["ruta"] == "carrito"
                 ) {
@@ -187,6 +188,7 @@ date_default_timezone_set('America/Tegucigalpa');
                     $_GET["ruta"] == "tienda" ||
                     $_GET["ruta"] == "detalle" ||
                     $_GET["ruta"] == "completo" ||
+                    $_GET["ruta"] == "direccion" ||
                     $_GET["ruta"] == "buscador" ||
                     $_GET["ruta"] == "carrito"
                 ) {
@@ -233,6 +235,7 @@ date_default_timezone_set('America/Tegucigalpa');
                 $_GET["ruta"] == "completo" ||
                 $_GET["ruta"] == "detalle" ||
                 $_GET["ruta"] == "buscador" ||
+                $_GET["ruta"] == "direccion" ||
                 $_GET["ruta"] == "carrito"
             ) {
                 include 'vistas/paginas/' . $_GET["ruta"] . '.php';

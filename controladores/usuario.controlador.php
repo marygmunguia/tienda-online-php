@@ -4,7 +4,7 @@ class ControladorUsuario
 {
 
 	/* INGRESO DE USUARIO */
-	public static function ctrIngresoUsuario()
+	static public function ctrIngresoUsuario()
 	{
 		if (isset($_POST["email"])) {
 			$tabla = "usuarios";
@@ -62,7 +62,7 @@ class ControladorUsuario
 	}
 
 	/* CREAR USUARIO */
-	public static function ctrCrearUsuario()
+	static public function ctrCrearUsuario()
 	{
 		if (isset($_POST["nombre"])) {
 			if (
@@ -220,7 +220,7 @@ class ControladorUsuario
 	}
 
 	/* MOSTRAR USUARIOS */
-	public static function ctrMostrarUsuarios($columna, $valor)
+	static public function ctrMostrarUsuarios($columna, $valor)
 	{
 		$tablaDB = "usuarios";
 
@@ -229,7 +229,7 @@ class ControladorUsuario
 		return $resultado;
 	}
 
-	public static function ctrEliminarUsuario()
+	static public function ctrEliminarUsuario()
 	{
 		if (isset($_POST["idUsuario"])) {
 
@@ -287,7 +287,7 @@ class ControladorUsuario
 		}
 	}
 
-	public static function ctrCrearUsuarioCliente()
+	static public function ctrCrearUsuarioCliente()
 	{
 		if (isset($_POST["nombre"])) {
 			if (
@@ -382,7 +382,7 @@ class ControladorUsuario
 	}
 
 
-	public static function ctrActualizarUsuario()
+	static public function ctrActualizarUsuario()
 	{
 		if (isset($_POST["nombreE"])) {
 
@@ -516,4 +516,199 @@ class ControladorUsuario
 			}
 		}
 	}
+
+
+	static public function ctrCambiarFotoPerfil()
+	{
+		if (isset($_POST["idUsuarioFoto"])) {
+
+			$ruta = $_POST["fotoActual"];
+
+			if (isset($_FILES["imagenNueva"]["tmp_name"]) && !empty($_FILES["imagenNueva"]["tmp_name"])) {
+
+				list($ancho, $alto) = getimagesize($_FILES["imagenNueva"]["tmp_name"]);
+
+				$nuevoAncho = 500;
+				$nuevoAlto = 500;
+
+				/*=============================================
+					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+					=============================================*/
+
+				$directorio = "vistas/img/usuarios";
+
+				/*=============================================
+					PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BD
+					=============================================*/
+
+				if (!empty($_POST["fotoActual"])) {
+
+					unlink($_POST["fotoActual"]);
+				} else {
+
+					mkdir($directorio, 0755);
+				}
+
+				/*=============================================
+					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+					=============================================*/
+
+				if ($_FILES["imagenNueva"]["type"] == "image/jpeg") {
+
+					/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+					$aleatorio = mt_rand(100, 9999);
+
+					$ruta = "vistas/img/usuarios/" . $aleatorio . ".jpg";
+
+					$origen = imagecreatefromjpeg($_FILES["imagenNueva"]["tmp_name"]);
+
+					$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+					imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+					imagejpeg($destino, $ruta);
+				}
+
+				if ($_FILES["imagenNueva"]["type"] == "image/png") {
+
+					/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+					$aleatorio = mt_rand(100, 9999);
+
+					$ruta = "vistas/img/usuarios/" . $aleatorio . ".png";
+
+					$origen = imagecreatefrompng($_FILES["imagenNueva"]["tmp_name"]);
+
+					$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+					imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+					imagepng($destino, $ruta);
+				}
+			}
+
+			$tablaDB = "usuarios";
+
+			$id = $_POST["idUsuarioFoto"];
+
+			$respuesta = ModeloUsuarios::mdlCambiarFotoPerfil($tablaDB, $id, $ruta);
+
+			if ($respuesta == true) {
+
+				$_SESSION["imagen"] = $ruta;
+
+				echo '<script>
+
+					swal({
+
+						type: "success",
+						title: "¡La foto se ha actualizado de forma exitosa!",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+
+					}).then(function(result){
+
+						if(result.value){
+						
+							window.location = "perfil";
+
+						}
+
+					});
+				
+
+					</script>';
+			} else {
+				echo '<script>
+
+					swal({
+
+						type: "error",
+						title: "¡La foto NO se ha actualizado correctamente!",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+
+					}).then(function(result){
+
+						if(result.value){
+						
+							window.location = "perfil";
+
+						}
+
+					});
+				
+
+					</script>';
+			}
+		}
+	}
+
+
+	static public function ctrIngresarDireccion()
+	{
+
+		if (isset($_POST["idusuario"])) {
+
+			$tablaDB = "direccion";
+
+			$datosC = array(
+				"idusuario" => $_POST["idusuario"],
+				"direccion1" => $_POST["direccion1"],
+				"direccion2" => $_POST["direccion2"],
+				"ciudad" => $_POST["ciudad"],
+				"departemento" => $_POST["departemento"],
+				"pais" => $_POST["pais"],
+				"telefono" => $_POST["telefono"],
+				"celular" => $_POST["celular"]
+			);
+
+			$resultado = ModeloUsuarios::mdlIngresarDireccion($tablaDB, $datosC);
+
+			if ($resultado == true) {
+				echo '<script>						
+					window.location = "detalle";		
+					</script>';
+			} else {
+				echo '<script>
+
+					swal({
+
+						type: "error",
+						title: "¡No hemos podido guardar tu dirección, intentalo más tarde!",
+						showConfirmButton: true,
+						confirmButtonText: "Cerrar"
+
+					}).then(function(result){
+
+						if(result.value){
+						
+							window.location = "carrito";
+
+						}
+
+					});
+				
+
+					</script>';
+			}
+		}
+	}
+
+
+	static public function ctrConsultarDireccion($columna, $valor)
+	{
+		$tablaDB = "direccion";
+
+		$resultado = ModeloUsuarios::mdlMostrarUsuarios($tablaDB, $columna, $valor);
+
+		return $resultado;
+	}
+
+
 }

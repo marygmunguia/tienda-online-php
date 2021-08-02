@@ -6,11 +6,10 @@ $correo = 'info@allonlinehn.com';
 
 $pago = $_SESSION["total"] / $dolar;
 
-$idSesion = session_id();
+?>
 
-if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
-    ?>
-    <div class="jumbotron text-center">
+
+<div class="jumbotron text-center">
     <h1 class="display-4">¡Último Paso!</h1>
     <p class="lead">Estás a punto de pagar con PayPal la cantidad de:</p>
     <hr class="my-4">
@@ -35,7 +34,7 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
                             value: '<?php echo number_format($pago, 2); ?>'
                         },
                         description: "Compra de productos a AllOnlineHN: $<?php echo number_format($pago, 2); ?>",
-                        custom: "<?php echo $idSesion; ?>"
+                        custom: ""
                     }]
                 });
             },
@@ -61,26 +60,3 @@ if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == 'ok') {
     </script>
 
 </div>
-
-<?php
-
-}else{
-    echo'<script>
-
-            swal({
-                  type: "error",
-                  title: "Registrate o Inicia Sesión para realizar tu compra!",
-                  showConfirmButton: true,
-                  confirmButtonText: "Cerrar"
-                  }).then(function(result){
-                            if (result.value) {
-
-                            window.location = "registro";
-
-                            }
-                        })
-
-            </script>';
-}
-
-?>

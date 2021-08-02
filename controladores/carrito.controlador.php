@@ -36,9 +36,9 @@ class ControladorCarrito
                 $isvP = $totalProducto * $isv;
                 $subtotal = $totalProducto - $isvP;
 
-                $_SESSION["total"] = number_format($totalProducto, 2);
-                $_SESSION["isv"] = number_format($isvP, 2);
-                $_SESSION["subtotal"] = number_format($subtotal, 2);
+                $_SESSION["total"] = $totalProducto;
+                $_SESSION["isv"] = $isvP;
+                $_SESSION["subtotal"] = $subtotal;
 
                 echo '<script>
 
@@ -117,7 +117,7 @@ swal({
                     $_SESSION["isv"]  = $_SESSION["isv"]  - (($valor['precio'] * $valor['cantidad']) * $isv);
 
                     $_SESSION["subtotal"]  = $_SESSION["subtotal"]  - (($valor['precio'] * $valor['cantidad']) - (($valor['precio'] * $valor['cantidad']) * $isv));
-                    
+
                     unset($_SESSION["carrito"][$key]);
 
                     echo '<script>
