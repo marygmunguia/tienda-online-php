@@ -41,3 +41,15 @@ $(".tablas").on("click", ".ver-detalle-venta", function () {
     }
   );
 });
+
+
+
+// FACTURA DE VENTA
+
+$(".tablas").on("click", ".imprimir-factura", function () {
+
+  var codigoVenta = $(this).attr("id");
+
+  window.open("extenciones/tcpdf/examples/factura.php?codigo="+codigoVenta, "_black");
+
+});

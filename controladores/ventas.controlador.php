@@ -101,4 +101,26 @@ class ControladorVentas
 
         return $resultado;
     }
+
+    static public function ctrConsultarVenta($columna, $valor)
+    {
+
+        $tablaDB = "ventas";
+
+        $resultado = ModeloVentas::mdlConsultaVenta($tablaDB, $columna, $valor);
+
+        return $resultado;
+    }
+
+
+    static public function ctrConsultarDetalleVentas($columna, $valor)
+    {
+
+        $tablaDB = "detalle_ventas_realizadas";
+
+        $resultado = ModeloVentas::mdlConsultarDetalleVentas($tablaDB, $columna, $valor);
+
+        return $resultado;
+    }
+
 }

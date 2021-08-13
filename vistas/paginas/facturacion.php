@@ -27,7 +27,6 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Cliente</th>
-                                        <th>Email</th>
                                         <th>Fecha</th>
                                         <th>Subtotal</th>
                                         <th>ISV</th>
@@ -50,7 +49,6 @@
                                         <tr>
                                             <td><?php echo $value["idventa"];  ?></td>
                                             <td><?php echo $value["nombre"];  ?></td>
-                                            <td><?php echo $value["email"];  ?></td>
                                             <td><?php echo $value["fecha"];  ?></td>
                                             <td><?php echo $value["subtotal"];  ?></td>
                                             <td><?php echo $value["isv"];  ?></td>
@@ -59,6 +57,7 @@
                                             <td>
                                                 <button type="button" class="btn btn-success btn-flat cambiar-estado-venta" id="<?php echo $value["idventa"] ?>" data-toggle="modal" data-target="#cambiar-estado-venta"><i class="fas fa-history"></i></button>
                                                 <button type="button" class="btn btn-info btn-flat ver-detalle-venta" id="<?php echo $value["idventa"] ?>" data-toggle="modal" data-target="#ver-info-venta"><i class="fas fa-info-circle"></i></button>
+                                                <button type="button" class="btn btn-primary btn-flat imprimir-factura" id="<?php echo $value["idventa"] ?>"><i class="fas fa-print"></i></button>
                                             </td>
                                         </tr>
                                     <?php
@@ -155,7 +154,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Imprimir Factura</button>
+                <button type="button" class="btn  btn-default" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -168,10 +168,9 @@
         <div class="modal-content">
             <div class="modal-body">
                 <h4>CAMBIAR ESTADO DE LA VENTA</h4>
-                
+
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 <button type="button" class="btn btn-danger">Aceptar</button>
             </div>
         </div>
