@@ -40,6 +40,9 @@
                             <a href="registro" class="btn btn-block btn-secondary">
                                 Registrarse
                             </a>
+                            <a href="olvidarClave" class="btn btn-block btn-primary">
+                                Recuperar Contraseña
+                            </a>
                             <a href="tienda" class="btn btn-block btn-info">
                                 Volver a la tienda
                             </a>

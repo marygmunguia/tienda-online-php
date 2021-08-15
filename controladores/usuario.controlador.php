@@ -1,5 +1,8 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class ControladorUsuario
 {
 
@@ -143,7 +146,8 @@ class ControladorUsuario
 					"clave" => $encriptar,
 					"tipo" => $_POST["tipo"],
 					"estado" => $_POST["estado"],
-					"imagen" => $ruta
+					"imagen" => $ruta,
+					"fecha" => date("Y-m-d")
 				);
 
 				$respuesta = ModeloUsuarios::mdlInsertarUsuario($tabla, $datos);
@@ -299,13 +303,16 @@ class ControladorUsuario
 
 				$encriptar = crypt($_POST["clave"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
+				date_default_timezone_set("America/Tegucigalpa");
+
 				$datos = array(
 					"nombre" => $_POST["nombre"],
 					"email" => $_POST["email"],
 					"clave" => $encriptar,
 					"tipo" => 'C',
 					"estado" => 'A',
-					"imagen" => 'vistas/img/boxed-bg.jpg'
+					"imagen" => 'vistas/img/boxed-bg.jpg',
+					"fecha" => date("Y-m-d")
 				);
 
 				$respuesta = ModeloUsuarios::mdlInsertarUsuario($tabla, $datos);
@@ -710,5 +717,127 @@ class ControladorUsuario
 		return $resultado;
 	}
 
+	public function ctrRestablecerPassword()
+    {
+        if (isset($_POST["correoRestablecer"])) {
+
+            $tablaDB = "usuarios";
+
+            $email = $_POST["correoRestablecer"];
+
+            $str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+            $password = "";
+
+            for ($i = 0; $i < 60; $i++) {
+                $password = substr($str, rand(25, 62), 25);
+            }
+
+            $encriptar = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
+            $respuesta = ModeloUsuarios::mdlRestablecerPasswordM($tablaDB, $email, $encriptar);
+
+            if ($respuesta == true) {
+
+                date_default_timezone_set("America/Tegucigalpa");
+
+                $mail = new PHPMailer;
+
+                $mail->Charset = "UTF-8";
+
+                $mail->isMail();
+
+                $mail->setFrom("info@allonline.com", "All Online HN");
+
+                $mail->addReplyTo("info@allonline.com", "All Online HN");
+
+                $mail->Subject  = "RESTABLECER CLAVE DE ACCESO AL SISTEMA";
+
+                $mail->addAddress($_POST["correoRestablecer"]);
+
+                $mail->msgHTML('<div style="width:100%; background:#eee; position:relative; font-family:sans-serif; padding-bottom:40px">
+        
+    
+                            <div style="position:relative; margin:auto; width:600px; background:white; padding:20px">
+                                
+                                <center>
+
+                                    <h3 style="font-weight:100; color:#999">SE HA RESTABLECIDO TU CLAVE DE ACCESO</h3>
+    
+                                    <hr style="border:1px solid #ccc; width:80%">
+    
+                                    <h4 style="font-weight:100; color:#999; padding:0 20px">TU CLAVE DE ACCESO TEMPORAR ES: ' . $password . '</h4>
+    
+                                    <br>
+    
+                                    <hr style="border:1px solid #ccc; width:80%">
+    
+                                    <h5 style="font-weight:100; color:#999">Si no te registraste en nuestra tienda, pueden innorar o eliminar este email.</h5>
+    
+                                </center>	
+    
+                            </div>
+    
+                        </div>');
+
+                $envio = $mail->Send();
+
+                if (!$envio) {
+
+                ?>
+                    <script LANGUAGE="javascript">
+                        $(document).ready(function() {
+
+                            swal({
+                                titltype: "error",
+                                title: "¡ERROR!",
+                                text: "NO SE LOGRAR RESTABLECER LA CONTRASEÑA CON EXITO",
+                                showConfirmButtom: true,
+                                confirmButtomText: "Cerrar"
+                            }).then((result) => {
+                                if (result.value) {
+                                    window.location = "login";
+                                }
+                            })
+
+                        });
+                    </script>
+
+                <?php
+
+                } else {
+                ?>
+                    <script LANGUAGE="javascript">
+                        $(document).ready(function() {
+
+                            swal({
+                                titltype: "success",
+                                title: "¡CORRECTO!",
+                                text: "SE LOGRAR RESTABLECER LA CONTRASEÑA CON EXITO.",
+                                showConfirmButtom: true,
+                                confirmButtomText: "Cerrar"
+                            }).then((result) => {
+                                if (result.value) {
+                                    window.location = "login";
+                                }
+                            })
+
+                        });
+                    </script>
+
+                    <?php
+                }
+            }
+        }
+    }
+
+	static public function ctrNuevosUsuariosC($tabla, $fechaInicio, $fechaFinal, $tipo)
+    {
+
+        $resultado = ModeloUsuarios::mdlNuevosUsuarios($tabla, $fechaInicio, $fechaFinal, $tipo);
+
+        return $resultado;
+
+    }
 
 }
+

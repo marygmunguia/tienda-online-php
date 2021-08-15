@@ -64,11 +64,11 @@ $bloque1 = <<<EOF
 				
 				<div style="font-size:8.5px; text-align:right; line-height:15px;">
 					
-					<br>
-					NIT: 71.759.963-9
+				<br>
+				RTN: 1807 2021 986754
 
-					<br>
-					Dirección: Calle 44B 92-11
+				<br>
+				Dirección: Calle 106, Col. Papaya
 
 				</div>
 
@@ -78,12 +78,12 @@ $bloque1 = <<<EOF
 
 				<div style="font-size:8.5px; text-align:right; line-height:15px;">
 					
-					<br>
-					Teléfono: 300 786 52 49
-					
-					<br>
-					ventas@inventorysystem.com
-
+				<br>
+				Teléfono: 2446 - 8705
+				
+				<br>
+				Email: info@allonlinehn.com
+				
 				</div>
 				
 			</td>
@@ -150,11 +150,11 @@ $bloque3 = <<<EOF
 
 		<tr>
 		
-		<td style="border: 1px solid #666; background-color:white; width:60px; text-align:center">ID</td>
-        <td style="border: 1px solid #666; background-color:white; width:200px; text-align:center">Producto</td>
-		<td style="border: 1px solid #666; background-color:white; width:80px; text-align:center">Cantidad</td>
-		<td style="border: 1px solid #666; background-color:white; width:100px; text-align:center">Valor Unit.</td>
-		<td style="border: 1px solid #666; background-color:white; width:100px; text-align:center">Valor Total</td>
+		<td style="border: 1px solid #666; background-color:#e9333b; color:white; width:60px; text-align:center">ID</td>
+        <td style="border: 1px solid #666; background-color:#e9333b; color:white; width:200px; text-align:center">Producto</td>
+		<td style="border: 1px solid #666; background-color:#e9333b; color:white; width:80px; text-align:center">Cantidad</td>
+		<td style="border: 1px solid #666; background-color:#e9333b; color:white; width:100px; text-align:center">Valor Unit.</td>
+		<td style="border: 1px solid #666; background-color:#e9333b; color:white; width:100px; text-align:center">Valor Total</td>
 
 		</tr>
 

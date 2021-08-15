@@ -55,7 +55,9 @@
                                             <td style=""><?php echo number_format($value["isv"], 2);  ?> Lps</td>
                                             <td style=""><?php echo number_format($value["total"],2); ?> Lps</td>
                                             <td style=""><?php echo $value["estado"];  ?> </td>
-                                            <td><button type="button" class="btn btn-info btn-flat ver-detalle-venta" id="<?php echo $value["idventa"] ?>" data-toggle="modal" data-target="#ver-info-venta"><i class="fas fa-info-circle"></i></button>
+                                            <td>
+                                                <button type="button" class="btn btn-info btn-flat ver-detalle-venta" id="<?php echo $value["idventa"] ?>" data-toggle="modal" data-target="#ver-info-venta"><i class="fas fa-info-circle"></i></button>
+                                                <button type="button" class="btn btn-primary btn-flat imprimir-factura" id="<?php echo $value["idventa"] ?>"><i class="fas fa-print"></i></button>
                                         </td>
                                         </tr>
 

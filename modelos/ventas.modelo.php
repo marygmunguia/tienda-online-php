@@ -51,6 +51,15 @@ class ModeloVentas extends Conexion
 		return $pdo->fetchAll();
 	}
 
+	public static function mdlProductosMasVendidos($tablaDB)
+	{
+		$pdo = Conexion::conectar()->prepare("SELECT * FROM $tablaDB ORDER BY cantidad DESC");
+		
+		$pdo->execute();
+
+		return $pdo->fetchAll();
+	}
+
 	/*=============================================
 	REGISTRO DE VENTA
 	=============================================*/

@@ -46,7 +46,7 @@ class ControladorVentas
 
                     $restarStock = ModeloVentas::mdlActualizarProducto($tablaProductos, $valor1a, $valor);
 
-                    if ($restarStock = true) {
+                    if ($restarStock == true) {
 
                         $tablaDetalle = "detallesventas";
 
@@ -60,9 +60,6 @@ class ControladorVentas
 
                         $ventaProducto = ModeloVentas::mdlIngresarProductoVendido($tablaDetalle, $datosProducto);
 
-                        if ($ventaProducto == true) {
-                            unset($datosProducto);
-                        }
                     }
                 }
             }
@@ -77,6 +74,24 @@ class ControladorVentas
             swal({
                   type: "success",
                   title: "Tu compra ha sido procesada con éxito!",
+                  showConfirmButton: true,
+                  confirmButtonText: "Cerrar"
+                  }).then(function(result){
+                            if (result.value) {
+
+                            window.location = "tienda";
+
+                            }
+                        })
+
+            </script>';
+        } else {
+
+            echo '<script>
+
+            swal({
+                  type: "success",
+                  title: "Tu compra NO ha sido procesada con éxito comunicate con info@allonlinehn.com!",
                   showConfirmButton: true,
                   confirmButtonText: "Cerrar"
                   }).then(function(result){
@@ -123,4 +138,11 @@ class ControladorVentas
         return $resultado;
     }
 
+    static public function ctrProductosMasVendidos($tablaDB)
+    {
+
+        $resultado = ModeloVentas::mdlProductosMasVendidos($tablaDB);
+
+        return $resultado;
+    }
 }

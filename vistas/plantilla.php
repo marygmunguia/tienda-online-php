@@ -140,7 +140,8 @@ date_default_timezone_set('America/Tegucigalpa');
 
                     include 'vistas/modulos/menuadmin.php';
 
-                    if ($_GET["ruta"] == "login") {
+                    if ($_GET["ruta"] == "login" ||
+                    $_GET["ruta"] == "registro") {
 
                         include 'vistas/paginas/home.php';
                     } else {
@@ -203,10 +204,9 @@ date_default_timezone_set('America/Tegucigalpa');
 
                     if (
                         $_GET["ruta"] == "login" ||
+                        $_GET["ruta"] == "home" ||
                         $_GET["ruta"] == "home-cliente"
                     ) {
-
-
                         include 'vistas/paginas/home-cliente.php';
                     } else {
                         include 'vistas/modulos/404.php';
@@ -241,6 +241,7 @@ date_default_timezone_set('America/Tegucigalpa');
                 $_GET["ruta"] == "detalle" ||
                 $_GET["ruta"] == "buscador" ||
                 $_GET["ruta"] == "direccion" ||
+                $_GET["ruta"] == "olvidarClave" ||
                 $_GET["ruta"] == "carrito"
             ) {
                 include 'vistas/paginas/' . $_GET["ruta"] . '.php';
@@ -262,6 +263,7 @@ date_default_timezone_set('America/Tegucigalpa');
     <script src="vistas/js/proveedores.js"></script>
     <script src="vistas/js/buscador.js"></script>
     <script src="vistas/js/ventas.js"></script>
+    <script src="vistas/js/reportes.js"></script>
 
 </body>
 

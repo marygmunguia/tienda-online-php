@@ -29,8 +29,8 @@ class ModeloUsuarios extends Conexion
 
     static public function mdlInsertarUsuario($tabla, $datosC)
     {
-        $pdo = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, email, clave, estado, tipo, imagen) VALUES 
-        (:nombre, :email, :clave, :estado, :tipo, :imagen)");
+        $pdo = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, email, clave, estado, tipo, imagen, fecha_registro) VALUES 
+        (:nombre, :email, :clave, :estado, :tipo, :imagen, :fecha_registro)");
 
         $pdo->bindParam(":nombre", $datosC["nombre"], PDO::PARAM_STR);
         $pdo->bindParam(":email", $datosC["email"], PDO::PARAM_STR);
@@ -38,6 +38,7 @@ class ModeloUsuarios extends Conexion
         $pdo->bindParam(":estado", $datosC["estado"], PDO::PARAM_STR);
         $pdo->bindParam(":tipo", $datosC["tipo"], PDO::PARAM_STR);
         $pdo->bindParam(":imagen", $datosC["imagen"], PDO::PARAM_STR);
+        $pdo->bindParam(":fecha_registro", $datosC["fecha"], PDO::PARAM_STR);
 
         if ($pdo->execute()) {
             return true;
@@ -116,6 +117,39 @@ class ModeloUsuarios extends Conexion
 
         return print_r(Conexion::conectar()->errorInfo());
     }
+
+    static public function mdlRestablecerPasswordM($tablaDB, $email, $password)
+    {
+
+        $pdo = Conexion::conectar()->prepare("UPDATE $tablaDB SET clave = :Rpassword WHERE email = :Remail");
+
+        $pdo->bindParam(":Rpassword", $password, PDO::PARAM_STR);
+        $pdo->bindParam(":Remail", $email, PDO::PARAM_STR);
+
+        if ($pdo->execute()) {
+
+            return true;
+
+        } else {
+            
+            return false;
+        }
+    }
+
+    static public function mdlNuevosUsuarios($tabla, $fechaInicio, $fechaFinal, $tipo)
+    {
+
+        $pdo = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE tipo = :tipo AND fecha_registro BETWEEN :inicio AND :final");
+
+        $pdo->bindParam(":inicio", $fechaInicio, pdo::PARAM_STR);
+        $pdo->bindParam(":final", $fechaFinal, pdo::PARAM_STR);
+        $pdo->bindParam(":tipo", $tipo, pdo::PARAM_STR);
+
+        $pdo->execute();
+
+        return $pdo->fetchAll();
+    }
+
 
 
 
